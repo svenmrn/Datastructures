@@ -43,13 +43,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CountdownRaket", "Recursie\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Teller", "Recursie\Teller\Teller.csproj", "{93F698DF-35F5-4AA2-B2EF-11CA71395C01}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Faculteit", "Recursie\Faculteit\Faculteit.csproj", "{F6AD5B6A-2592-4144-8801-1A88AB40F87C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Faculteit", "Recursie\Faculteit\Faculteit.csproj", "{F6AD5B6A-2592-4144-8801-1A88AB40F87C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SplitAndReverse", "Recursie\SplitAndReverse\SplitAndReverse.csproj", "{9278E434-E17F-423D-9E97-4FE0877795B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SplitAndReverse", "Recursie\SplitAndReverse\SplitAndReverse.csproj", "{9278E434-E17F-423D-9E97-4FE0877795B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AantalCijfers", "Recursie\AantalCijfers\AantalCijfers.csproj", "{6941D1D6-B7D3-4549-ADB2-89FE33F6D628}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AantalCijfers", "Recursie\AantalCijfers\AantalCijfers.csproj", "{6941D1D6-B7D3-4549-ADB2-89FE33F6D628}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fibonacci", "Recursie\Fibonacci\Fibonacci.csproj", "{D02F8445-250A-4237-9907-758AE0589F0A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fibonacci", "Recursie\Fibonacci\Fibonacci.csproj", "{D02F8445-250A-4237-9907-758AE0589F0A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "6.SorteerAlgoritmen", "6.SorteerAlgoritmen", "{CD3A4914-143E-4642-A3A2-BE5483647902}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SorteerAlgoritmen", "SorteerAlgoritmen\SorteerAlgoritmen\SorteerAlgoritmen.csproj", "{5AE69935-A67A-4936-B5AE-727050E9E62C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -129,6 +133,10 @@ Global
 		{D02F8445-250A-4237-9907-758AE0589F0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D02F8445-250A-4237-9907-758AE0589F0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D02F8445-250A-4237-9907-758AE0589F0A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5AE69935-A67A-4936-B5AE-727050E9E62C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5AE69935-A67A-4936-B5AE-727050E9E62C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5AE69935-A67A-4936-B5AE-727050E9E62C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5AE69935-A67A-4936-B5AE-727050E9E62C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -152,6 +160,7 @@ Global
 		{9278E434-E17F-423D-9E97-4FE0877795B4} = {33E34362-492C-4D61-9FC9-6B07C5029056}
 		{6941D1D6-B7D3-4549-ADB2-89FE33F6D628} = {33E34362-492C-4D61-9FC9-6B07C5029056}
 		{D02F8445-250A-4237-9907-758AE0589F0A} = {33E34362-492C-4D61-9FC9-6B07C5029056}
+		{5AE69935-A67A-4936-B5AE-727050E9E62C} = {CD3A4914-143E-4642-A3A2-BE5483647902}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {63B979FD-FFD1-47BB-886C-320C5127E9AD}
