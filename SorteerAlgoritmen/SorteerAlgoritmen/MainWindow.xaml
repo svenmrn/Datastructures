@@ -9,6 +9,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -16,8 +17,12 @@
             <ColumnDefinition Width="100"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-
-        <Grid Grid.ColumnSpan="3">
+        <Menu Name="menu1" Height="22">
+            <MenuItem Header="Menu">
+                <MenuItem x:Name="menuCars" Header="Genereer random Auto's" Click="menuCars_Click" ></MenuItem>
+            </MenuItem>
+        </Menu>
+        <Grid Grid.Row="1" Grid.ColumnSpan="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -36,17 +41,21 @@
             <TextBox x:Name="tbMax" Grid.Column="1" HorizontalAlignment="Stretch"  Grid.Row="2" Text="100" VerticalAlignment="Center"  Margin="5"/>
             <Button x:Name="btGenerate" Content="Genereer random waarden" Grid.Column="2" HorizontalAlignment="Stretch" Height="30"  VerticalAlignment="Center" Margin="5" Click="btGenerate_Click"/>
             <CheckBox x:Name="cbUnique" Content="Geen dubbele waarden" Grid.Column="2" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Center" Margin="5" IsChecked="True"/>
-            <Button x:Name="btClear" Content="Alles wissen" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Stretch" Height="30"  VerticalAlignment="Center" Margin="5" Click="btClear_Click" />
-
+            <StackPanel Orientation="Horizontal" Grid.Column="2"  Grid.Row="2">
+                <Label Content="Manueel toevoegen:"></Label>
+                <TextBox x:Name="tbManual" Text="1" Width="100" VerticalAlignment="Center"  Margin="5" KeyDown="tbManual_KeyDown"/>
+            </StackPanel>
         </Grid>
-        <ListBox x:Name="lbUnsorted" Grid.Row="1" Background="LightGray" Margin="20,5,5,5"/>
-        <ListBox x:Name="lbSorted" Grid.Column="2" Grid.Row="1" Background="Gray" Margin="5,5,20,5"/>
-        <StackPanel Grid.Column="1"  Grid.Row="1" >
+        <ListBox x:Name="lbUnsorted" Grid.Row="2" Background="LightGray" Margin="20,5,5,5"/>
+        <ListBox x:Name="lbSorted" Grid.Column="2" Grid.Row="2" Background="Gray" Margin="5,5,20,5"/>
+        <StackPanel Grid.Column="1"  Grid.Row="2" >
             <Button x:Name="btBubble" Margin="5" VerticalAlignment="Top" HorizontalAlignment="Stretch" Content="Bubblesort" Height="30" Tag="BS" Click="Button_Click"/>
             <Button x:Name="btSelection" Margin="5" VerticalAlignment="Top" HorizontalAlignment="Stretch" Content="Selectionsort" Height="30" Tag="SS"  Click="Button_Click"/>
             <Button x:Name="btInsertion" Margin="5" VerticalAlignment="Top" HorizontalAlignment="Stretch" Content="Insertionsort" Height="30" Tag="IS" Click="Button_Click"/>
             <Button x:Name ="btQuick" Margin="5" VerticalAlignment="Top" HorizontalAlignment="Stretch" Content="Quicksort" Height="30" Tag="QS"  Click="Button_Click"/>
             <Button x:Name ="btMerge" Margin="5" VerticalAlignment="Top" HorizontalAlignment="Stretch" Content="Mergesort" Height="30" Tag="MS"  Click="Button_Click"/>
+            <TextBlock  x:Name="lbTime" Margin="0,20" Text="Tijd: 0:10" Foreground="Red" HorizontalAlignment="Center" TextWrapping="Wrap"/>
+            <Button x:Name="btClear" Margin="5,20" FontWeight="Black" Content="Alles wissen" HorizontalAlignment="Stretch" Height="30"  VerticalAlignment="Bottom" Click="btClear_Click" />
         </StackPanel>
 
     </Grid>

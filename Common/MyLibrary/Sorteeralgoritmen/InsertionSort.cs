@@ -27,5 +27,25 @@ namespace MyLibrary.Sorteeralgoritmen
                 list[newIndex] = current;
             }
         }
+
+        public void Sort(Auto[] list)
+        {
+            for (int i = 1; i < list.Length; i++)
+            {
+                var current = list[i];       //type 'Auto' kan ook ipv. 'var', maar dit bespaart werk als ik nadien bv. ook een sorteer 'Persoon', 'Fruit',... versie wil maken
+                int newIndex = i;
+                while (newIndex > 0)
+                {
+                    if (current.AantalKm < list[newIndex - 1].AantalKm)  //Crusiaal verschil de bovenste versie, we vergelijken hier de km stand om Auto's te kunnen rangschikken, maar.. is dit de beste manier ????
+                    {
+                        list[newIndex] = list[newIndex - 1];
+                        newIndex--;
+                    }
+                    else
+                        break;
+                }
+                list[newIndex] = current;
+            }
+        }
     }
 }

@@ -10,6 +10,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.Queue", "3.Queue", "{8520F6B1-4CFB-46A3-ABB6-87C0D6F6D0A3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.Complexity", "4.Complexity", "{6A237AEB-45AA-440A-9442-8753AE614EB0}"
+	ProjectSection(SolutionItems) = preProject
+		Oef_BigO_opl.pdf = Oef_BigO_opl.pdf
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5.Recursie", "5.Recursie", "{33E34362-492C-4D61-9FC9-6B07C5029056}"
 EndProject

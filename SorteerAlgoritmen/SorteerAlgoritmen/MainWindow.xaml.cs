@@ -1,6 +1,8 @@
-﻿using MyLibrary.Sorteeralgoritmen;
+﻿using MyLibrary;
+using MyLibrary.Sorteeralgoritmen;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,6 +26,12 @@ namespace SorteerAlgoritmen
         public MainWindow()
         {
             InitializeComponent();
+            lbUnsorted.Items.Add(5);
+            lbUnsorted.Items.Add(4);
+            lbUnsorted.Items.Add(3);
+            lbUnsorted.Items.Add(2);
+            lbUnsorted.Items.Add(1);
+
         }
 
 
@@ -60,7 +68,10 @@ namespace SorteerAlgoritmen
             UpdateUI(true);
             Mouse.OverrideCursor = Cursors.Wait;
             lbSorted.Items.Clear();
-            switch(b.Tag)
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
+
+            switch (b.Tag)
             {
                 case "BS":
                     {
@@ -81,9 +92,18 @@ namespace SorteerAlgoritmen
                 case "IS":
                     {
                         var ins = new InsertionSort();
-                        var list = GetList(lbUnsorted);
-                        ins.Sort(list);
-                        SetList(lbSorted, list);
+                        if (!(lbUnsorted.Items[0] is Auto))   //Speciaal geval, sorteren van Auto's
+                        {
+                            var list = GetList(lbUnsorted);
+                            ins.Sort(list);
+                            SetList(lbSorted, list);
+                        }
+                        else
+                        {
+                            var list = GetAutoList(lbUnsorted);
+                            ins.Sort(list);
+                            SetList(lbSorted, list);
+                        }
                     }
                     break;
                 case "QS":
@@ -106,6 +126,8 @@ namespace SorteerAlgoritmen
                     MessageBox.Show("dit algoritme is nog niet in werking !");
                     break;
             }
+            sw.Stop();
+            lbTime.Text = $"Tijd: {sw.Elapsed.ToString(@"mm\:ss\.fff")}";
             UpdateUI(false);
         }
 
@@ -128,7 +150,23 @@ namespace SorteerAlgoritmen
             return list;
         }
 
+        private Auto[] GetAutoList(ListBox box)
+        {
+            var list = new Auto[box.Items.Count];
+            for (int i = 0; i < list.Length; i++)
+            {
+                list[i] = (Auto)box.Items[i];
+            }
+            return list;
+        }
+
         private void SetList(ListBox box, int[] list)
+        {
+            foreach (var i in list)
+                box.Items.Add(i);
+        }
+
+        private void SetList(ListBox box, Auto[] list)
         {
             foreach (var i in list)
                 box.Items.Add(i);
@@ -145,6 +183,33 @@ namespace SorteerAlgoritmen
             btMerge.IsEnabled = !busy;
         }
 
- 
+        private void tbManual_KeyDown(object sender, KeyEventArgs e)
+        {
+            int nr = 0;
+            if (e.Key == Key.Enter && int.TryParse(tbManual.Text, out nr))
+            {
+                lbUnsorted.Items.Add(nr);
+                tbManual.Text = "";
+            }
+        }
+
+        private void menuCars_Click(object sender, RoutedEventArgs e)
+        {
+            string[] modellen = new[] { "Opel", "BMW", "Ford", "Mercedes", "Fiat" };
+            string[] colors = new[] { "Groen", "Rood", "Blauw", "Wit", "Zwart" };
+
+            for(var i = 0; i < int.Parse(tbAmount.Text); i++)
+            {
+                var a = new Auto()
+                {
+                    Model = modellen[new Random().Next(0, modellen.Length)],
+                    Kleur = colors[new Random().Next(0, colors.Length)],
+                    Bouwjaar = 2000 + new Random().Next(0,20),
+                    Brandstof = (Brandstof)new Random().Next(0,3),
+                    AantalKm = new Random().Next(100000)
+                };
+                lbUnsorted.Items.Add(a);
+            }
+        }
     }
 }
