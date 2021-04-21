@@ -12,17 +12,19 @@ namespace MyLibrary.Sorteeralgoritmen
         {
             for (int i = 1; i < list.Length; i++)
             {
-                for (int j = i; j > 0; j--)
+                int current = list[i];
+                int newIndex = i;
+                while (newIndex > 0)
                 {
-                    if (list[j] < list[j - 1])
+                    if (current < list[newIndex - 1])
                     {
-                        var temp = list[j];
-                        list[j] = list[j - 1];
-                        list[j - 1] = temp;
+                        list[newIndex] = list[newIndex - 1];
+                        newIndex--;
                     }
                     else
                         break;
                 }
+                list[newIndex] = current;
             }
         }
     }
