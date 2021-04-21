@@ -49,13 +49,13 @@
         <ListBox x:Name="lbUnsorted" Grid.Row="2" Background="LightGray" Margin="20,5,5,5"/>
         <ListBox x:Name="lbSorted" Grid.Column="2" Grid.Row="2" Background="Gray" Margin="5,5,20,5"/>
         <StackPanel Grid.Column="1"  Grid.Row="2" >
-            <Button x:Name="btBubble" Margin="5" VerticalAlignment="Top" HorizontalAlignment="Stretch" Content="Bubblesort" Height="30" Tag="BS" Click="Button_Click"/>
-            <Button x:Name="btSelection" Margin="5" VerticalAlignment="Top" HorizontalAlignment="Stretch" Content="Selectionsort" Height="30" Tag="SS"  Click="Button_Click"/>
-            <Button x:Name="btInsertion" Margin="5" VerticalAlignment="Top" HorizontalAlignment="Stretch" Content="Insertionsort" Height="30" Tag="IS" Click="Button_Click"/>
-            <Button x:Name ="btQuick" Margin="5" VerticalAlignment="Top" HorizontalAlignment="Stretch" Content="Quicksort" Height="30" Tag="QS"  Click="Button_Click"/>
-            <Button x:Name ="btMerge" Margin="5" VerticalAlignment="Top" HorizontalAlignment="Stretch" Content="Mergesort" Height="30" Tag="MS"  Click="Button_Click"/>
-            <TextBlock  x:Name="lbTime" Margin="0,20" Text="Tijd: 0:10" Foreground="Red" HorizontalAlignment="Center" TextWrapping="Wrap"/>
-            <Button x:Name="btClear" Margin="5,20" FontWeight="Black" Content="Alles wissen" HorizontalAlignment="Stretch" Height="30"  VerticalAlignment="Bottom" Click="btClear_Click" />
+            <Button x:Name="btBubble" Margin="5" VerticalAlignment="Top" HorizontalAlignment="Stretch" Content="Bubblesort" Height="30" Tag="BS" Click="btSort_Click"/>
+            <Button x:Name="btSelection" Margin="5" VerticalAlignment="Top" HorizontalAlignment="Stretch" Content="Selectionsort" Height="30" Tag="SS"  Click="btSort_Click"/>
+            <Button x:Name="btInsertion" Margin="5" VerticalAlignment="Top" HorizontalAlignment="Stretch" Content="Insertionsort" Height="30" Tag="IS" Click="btSort_Click"/>
+            <Button x:Name ="btQuick" Margin="5" VerticalAlignment="Top" HorizontalAlignment="Stretch" Content="Quicksort" Height="30" Tag="QS"  Click="btSort_Click"/>
+            <Button x:Name ="btMerge" Margin="5" VerticalAlignment="Top" HorizontalAlignment="Stretch" Content="Mergesort" Height="30" Tag="MS"  Click="btSort_Click"/>
+            <TextBlock  x:Name="lbTime" Margin="0,20,0,0" Text="Tijd: 0:10" Foreground="Red" HorizontalAlignment="Center" TextWrapping="Wrap"/>
+            <Button x:Name="btClear" Margin="5" FontWeight="Black" Content="Alles wissen" HorizontalAlignment="Stretch" Height="30"  VerticalAlignment="Bottom" Click="btClear_Click" />
         </StackPanel>
 
     </Grid>

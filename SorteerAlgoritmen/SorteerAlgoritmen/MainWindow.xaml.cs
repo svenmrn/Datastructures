@@ -26,16 +26,13 @@ namespace SorteerAlgoritmen
         public MainWindow()
         {
             InitializeComponent();
-            lbUnsorted.Items.Add(5);
-            lbUnsorted.Items.Add(4);
-            lbUnsorted.Items.Add(3);
-            lbUnsorted.Items.Add(2);
-            lbUnsorted.Items.Add(1);
-
         }
 
-
-
+        /// <summary>
+        /// Genereer een aantal willekeurige getallen
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btGenerate_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -43,81 +40,93 @@ namespace SorteerAlgoritmen
                 UpdateUI(true);
                 var rg = new RandomGenerator(ReadInput(tbAmount), ReadInput(tbMin), ReadInput(tbMax), cbUnique.IsChecked.Value);
                 var list = rg.GenerateNumbers();
-                foreach (var l in list)
-                    lbUnsorted.Items.Add(l);
+                SetList(lbUnsorted, list);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
             finally
             {
-                UpdateUI(false);
+                UpdateUI();
             }
         }
 
+
+
+        /// <summary>
+        /// Beide listboxen leegmaken
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btClear_Click(object sender, RoutedEventArgs e)
         {
             lbUnsorted.Items.Clear();
             lbSorted.Items.Clear();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Sorteer de lijst met behulp van een bepaald algoritme
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btSort_Click(object sender, RoutedEventArgs e)
         {
-            Button b = sender as Button;
+            Button b = sender as Button;        //Van welke knop komt de click ?
+            lbSorted.Items.Clear();             //Gesorteerde lijst wissen
             UpdateUI(true);
-            Mouse.OverrideCursor = Cursors.Wait;
-            lbSorted.Items.Clear();
-            Stopwatch sw = new Stopwatch();
+            int[] list = null;
+
+            Stopwatch sw = new Stopwatch();    //Stopwatch voor tijdsmeting
             sw.Start();
 
             switch (b.Tag)
             {
-                case "BS":
+                case "BS":   //Bubble sort
                     {
                         var bs = new BubbleSort();
-                        var list = GetList(lbUnsorted);
+                        list = GetList(lbUnsorted);
                         bs.Sort(list);
                         SetList(lbSorted, list);
                     }
                     break;
-                case "SS":
+                case "SS":   //Selection Sort
                     {
                         var ss = new SelectionSort();
-                        var list = GetList(lbUnsorted);
+                        list = GetList(lbUnsorted);
                         ss.Sort(list);
                         SetList(lbSorted, list);
                     }
                     break;
-                case "IS":
+                case "IS":   //Insertion Sort
                     {
                         var ins = new InsertionSort();
                         if (!(lbUnsorted.Items[0] is Auto))   //Speciaal geval, sorteren van Auto's
                         {
-                            var list = GetList(lbUnsorted);
+                            list = GetList(lbUnsorted);
                             ins.Sort(list);
                             SetList(lbSorted, list);
                         }
                         else
                         {
-                            var list = GetAutoList(lbUnsorted);
-                            ins.Sort(list);
-                            SetList(lbSorted, list);
+                            var carList = GetAutoList(lbUnsorted);
+                            ins.Sort(carList);
+                            SetList(lbSorted, carList);
                         }
                     }
                     break;
-                case "QS":
+                case "QS":   //Quicksort
                     {
                         var qs = new QuickSort();
-                        var list = GetList(lbUnsorted);
+                        list = GetList(lbUnsorted);
                         qs.Sort(list, 0, list.Length - 1);
                         SetList(lbSorted, list);
                     }
                     break;
-                case "MS":
+                case "MS":    //Merge sort
                     {
                         var ms = new MergeSort();
-                        var list = GetList(lbUnsorted);
+                        list = GetList(lbUnsorted);
                         var sortedList = ms.Sort(list);
                         SetList(lbSorted, sortedList);
                     }
@@ -128,9 +137,18 @@ namespace SorteerAlgoritmen
             }
             sw.Stop();
             lbTime.Text = $"Tijd: {sw.Elapsed.ToString(@"mm\:ss\.fff")}";
-            UpdateUI(false);
+
+            if (!CheckIfOrdered(list))
+                MessageBox.Show("De lijst is niet correct gesorteerd");
+
+            UpdateUI();
         }
 
+        /// <summary>
+        /// Helper methode om de invoer om te zetten naar een integer
+        /// </summary>
+        /// <param name="box"></param>
+        /// <returns></returns>
         private int ReadInput(TextBox box)
         {
             int temp = 0;
@@ -140,6 +158,11 @@ namespace SorteerAlgoritmen
             throw new Exception("ingevoerde waarde is ongeldig");
         }
 
+        /// <summary>
+        /// Haal de waarden uit een listbox en zet ze om naar een array
+        /// </summary>
+        /// <param name="box"></param>
+        /// <returns></returns>
         private int[] GetList(ListBox box)
         {
             int[] list = new int[box.Items.Count];
@@ -160,6 +183,11 @@ namespace SorteerAlgoritmen
             return list;
         }
 
+        /// <summary>
+        /// Voeg de lijst met getallen toe aan een listbox
+        /// </summary>
+        /// <param name="box"></param>
+        /// <param name="list"></param>
         private void SetList(ListBox box, int[] list)
         {
             foreach (var i in list)
@@ -174,15 +202,27 @@ namespace SorteerAlgoritmen
 
         private void UpdateUI(bool busy = false)
         {
-            Mouse.OverrideCursor = busy ?Cursors.Wait: null;
-            btGenerate.IsEnabled = !busy;
-            btBubble.IsEnabled = !busy;
-            btSelection.IsEnabled = !busy;
-            btInsertion.IsEnabled = !busy;
-            btQuick.IsEnabled = !busy;
-            btMerge.IsEnabled = !busy;
+            Mouse.OverrideCursor = busy ? Cursors.Wait : null;
         }
 
+        private bool CheckIfOrdered(int[] list)
+        {
+            if (list == null || list.Length == 0) return true;
+
+            var current = list[0];
+            foreach(var item in list)
+            {
+                if (item < current)
+                    return false;
+                current = item;
+            }
+            return true;
+        }
+        /// <summary>
+        /// Geef manueel een getal in, voeg dit toe aan de lijst van unsorted elementen
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void tbManual_KeyDown(object sender, KeyEventArgs e)
         {
             int nr = 0;
@@ -193,19 +233,24 @@ namespace SorteerAlgoritmen
             }
         }
 
+        /// <summary>
+        /// Voeg een aantal willekeurige auto's toe (code zelf te schrijven)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void menuCars_Click(object sender, RoutedEventArgs e)
         {
             string[] modellen = new[] { "Opel", "BMW", "Ford", "Mercedes", "Fiat" };
             string[] colors = new[] { "Groen", "Rood", "Blauw", "Wit", "Zwart" };
 
-            for(var i = 0; i < int.Parse(tbAmount.Text); i++)
+            for (var i = 0; i < int.Parse(tbAmount.Text); i++)
             {
                 var a = new Auto()
                 {
                     Model = modellen[new Random().Next(0, modellen.Length)],
                     Kleur = colors[new Random().Next(0, colors.Length)],
-                    Bouwjaar = 2000 + new Random().Next(0,20),
-                    Brandstof = (Brandstof)new Random().Next(0,3),
+                    Bouwjaar = 2000 + new Random().Next(0, 20),
+                    Brandstof = (Brandstof)new Random().Next(0, 3),
                     AantalKm = new Random().Next(100000)
                 };
                 lbUnsorted.Items.Add(a);
