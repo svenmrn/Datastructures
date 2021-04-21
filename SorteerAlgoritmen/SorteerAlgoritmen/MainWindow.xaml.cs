@@ -75,6 +75,7 @@ namespace SorteerAlgoritmen
             Button b = sender as Button;        //Van welke knop komt de click ?
             lbSorted.Items.Clear();             //Gesorteerde lijst wissen
             UpdateUI(true);
+            int[] list = null;                  //De te sorteren lijst
 
             Stopwatch sw = new Stopwatch();    //Stopwatch voor tijdsmeting
             sw.Start();                     
@@ -84,28 +85,9 @@ namespace SorteerAlgoritmen
                 case "BS":   //Bubble sort
                     {
                         //var bs = new BubbleSort();              //Voorbeeld code, sorteeralgo zelf te maken 
-                        //var list = GetList(lbUnsorted);
+                        list = GetList(lbUnsorted);
                         //bs.Sort(list);
-                        //SetList(lbSorted, list);
-                    }
-                    break;
-                case "SS":   //Selection Sort
-                    {
-                      
-                    }
-                    break;
-                case "IS":   //Insertion Sort
-                    {
-                    }   
-                    break;
-                case "QS":   //Quicksort
-                    {
-                       
-                    }
-                    break;
-                case "MS":    //Merge sort
-                    {
-                       
+                        SetList(lbSorted, list);
                     }
                     break;
                 default:
@@ -114,6 +96,10 @@ namespace SorteerAlgoritmen
             }
             sw.Stop();
             lbTime.Text = $"Tijd: {sw.Elapsed.ToString(@"mm\:ss\.fff")}";
+
+            if (!CheckIfOrdered(list))
+                MessageBox.Show("De lijst is niet correct gesorteerd");
+
             UpdateUI();
         }
 
@@ -157,9 +143,33 @@ namespace SorteerAlgoritmen
                 box.Items.Add(i);
         }
 
+        /// <summary>
+        /// Verander de mouse pointer zodat de gebruiker ziet dat de applicatie bezig is.
+        /// </summary>
+        /// <param name="busy"></param>
         private void UpdateUI(bool busy = false)
         {
             Mouse.OverrideCursor = busy ?Cursors.Wait: null;
+        }
+
+
+        /// <summary>
+        /// Overloop en controleer of de lijst wel degelijk gesorteerd is
+        /// </summary>
+        /// <param name="list"></param>
+        /// <returns></returns>
+        private bool CheckIfOrdered(int[] list)
+        {
+            if (list == null || list.Length == 0) return true;
+
+            var current = list[0];
+            foreach (var item in list)
+            {
+                if (item < current)
+                    return false;
+                current = item;
+            }
+            return true;
         }
 
         /// <summary>
@@ -184,7 +194,7 @@ namespace SorteerAlgoritmen
         /// <param name="e"></param>
         private void menuCars_Click(object sender, RoutedEventArgs e)
         {
-           
+            MessageBox.Show("Oeps er is iets misgegaan. Probeer later nog eens opnieuw...");
         }
     }
 }
