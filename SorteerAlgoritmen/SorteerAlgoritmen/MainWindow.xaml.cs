@@ -86,16 +86,25 @@ namespace SorteerAlgoritmen
                     {
                         var bs = new BubbleSort();
                         list = GetList(lbUnsorted);
-                        bs.Sort(list);
+                        bs.SortRecursive(list);
                         SetList(lbSorted, list);
                     }
                     break;
                 case "SS":   //Selection Sort
                     {
                         var ss = new SelectionSort();
-                        list = GetList(lbUnsorted);
-                        ss.Sort(list);
-                        SetList(lbSorted, list);
+                        if (!(lbUnsorted.Items[0] is String))
+                        {
+                            list = GetList(lbUnsorted);
+                            ss.Sort(list);
+                            SetList(lbSorted, list);
+                        }
+                        else
+                        {
+                            var stringList = GetStringList(lbUnsorted);
+                            ss.Sort(stringList);
+                            SetList(lbSorted, stringList);
+                        }
                     }
                     break;
                 case "IS":   //Insertion Sort
@@ -173,6 +182,16 @@ namespace SorteerAlgoritmen
             return list;
         }
 
+        private string[] GetStringList(ListBox box)
+        {
+            string[] list = new string[box.Items.Count];
+            for (int i = 0; i < list.Length; i++)
+            {
+                list[i] = (string)box.Items[i];
+            }
+            return list;
+        }
+
         private Auto[] GetAutoList(ListBox box)
         {
             var list = new Auto[box.Items.Count];
@@ -194,6 +213,12 @@ namespace SorteerAlgoritmen
                 box.Items.Add(i);
         }
 
+        private void SetList(ListBox box, string[] list)
+        {
+            foreach (var i in list)
+                box.Items.Add(i);
+        }
+
         private void SetList(ListBox box, Auto[] list)
         {
             foreach (var i in list)
@@ -205,12 +230,17 @@ namespace SorteerAlgoritmen
             Mouse.OverrideCursor = busy ? Cursors.Wait : null;
         }
 
+        /// <summary>
+        /// Overloop en controleer of de lijst wel degelijk gesorteerd is
+        /// </summary>
+        /// <param name="list"></param>
+        /// <returns></returns>
         private bool CheckIfOrdered(int[] list)
         {
             if (list == null || list.Length == 0) return true;
 
             var current = list[0];
-            foreach(var item in list)
+            foreach (var item in list)
             {
                 if (item < current)
                     return false;
@@ -226,9 +256,15 @@ namespace SorteerAlgoritmen
         private void tbManual_KeyDown(object sender, KeyEventArgs e)
         {
             int nr = 0;
-            if (e.Key == Key.Enter && int.TryParse(tbManual.Text, out nr))
+            if (e.Key == Key.Enter)
             {
-                lbUnsorted.Items.Add(nr);
+                if (int.TryParse(tbManual.Text, out nr))
+                {
+                    lbUnsorted.Items.Add(nr);
+                } else
+                {
+                    lbUnsorted.Items.Add(tbManual.Text);
+                }
                 tbManual.Text = "";
             }
         }
@@ -243,7 +279,7 @@ namespace SorteerAlgoritmen
             string[] modellen = new[] { "Opel", "BMW", "Ford", "Mercedes", "Fiat" };
             string[] colors = new[] { "Groen", "Rood", "Blauw", "Wit", "Zwart" };
 
-            for (var i = 0; i < int.Parse(tbAmount.Text); i++)
+            for (var i = 0; i < ReadInput(tbAmount); i++)
             {
                 var a = new Auto()
                 {
@@ -251,7 +287,7 @@ namespace SorteerAlgoritmen
                     Kleur = colors[new Random().Next(0, colors.Length)],
                     Bouwjaar = 2000 + new Random().Next(0, 20),
                     Brandstof = (Brandstof)new Random().Next(0, 3),
-                    AantalKm = new Random().Next(100000)
+                    AantalKm = new Random().Next(ReadInput(tbMin), ReadInput(tbMax))
                 };
                 lbUnsorted.Items.Add(a);
             }
