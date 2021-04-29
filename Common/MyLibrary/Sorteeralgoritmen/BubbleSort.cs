@@ -34,10 +34,9 @@ namespace MyLibrary.Sorteeralgoritmen
         public void SortIntelligent(int[] list)              // lijst met lengte n
         {
             var n = list.Length;
-            var hasSwapped = false;               //swap done indicator
             for (int f = 1; f <= n - 1; f++)      // iteraties
             {
-                hasSwapped = false;
+                var hasSwapped = false;             //swap done indicator
                 for (int g = 0; g < n - f; g++)   // overloop van links naar rechts
                 {
                     if (list[g] > list[g + 1])    // compare
