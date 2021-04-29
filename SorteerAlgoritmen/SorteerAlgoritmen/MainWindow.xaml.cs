@@ -86,7 +86,7 @@ namespace SorteerAlgoritmen
                     {
                         var bs = new BubbleSort();
                         list = GetList(lbUnsorted);
-                        bs.SortRecursive(list);
+                        bs.Sort(list);
                         SetList(lbSorted, list);
                     }
                     break;
