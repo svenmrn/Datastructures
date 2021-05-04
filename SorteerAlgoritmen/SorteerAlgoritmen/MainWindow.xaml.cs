@@ -78,16 +78,66 @@ namespace SorteerAlgoritmen
             int[] list = null;                  //De te sorteren lijst
 
             Stopwatch sw = new Stopwatch();    //Stopwatch voor tijdsmeting
-            sw.Start();                     
+            sw.Start();
 
             switch (b.Tag)
             {
                 case "BS":   //Bubble sort
                     {
-                        //var bs = new BubbleSort();              //Voorbeeld code, sorteeralgo zelf te maken 
+                        var bs = new BubbleSort();
                         list = GetList(lbUnsorted);
-                        //bs.Sort(list);
+                        bs.Sort(list);
                         SetList(lbSorted, list);
+                    }
+                    break;
+                case "SS":   //Selection Sort
+                    {
+                        var ss = new SelectionSort();
+                        if (!(lbUnsorted.Items[0] is String))
+                        {
+                            list = GetList(lbUnsorted);
+                            ss.Sort(list);
+                            SetList(lbSorted, list);
+                        }
+                        else
+                        {
+                            var stringList = GetStringList(lbUnsorted);
+                            ss.Sort(stringList);
+                            SetList(lbSorted, stringList);
+                        }
+                    }
+                    break;
+                case "IS":   //Insertion Sort
+                    {
+                        var ins = new InsertionSort();
+                        if (!(lbUnsorted.Items[0] is Auto))   //Speciaal geval, sorteren van Auto's
+                        {
+                            list = GetList(lbUnsorted);
+                            ins.Sort(list);
+                            SetList(lbSorted, list);
+                        }
+                        else
+                        {
+                            var carList = GetAutoList(lbUnsorted);
+                            ins.Sort(carList);
+                            SetList(lbSorted, carList);
+                        }
+                    }
+                    break;
+                case "QS":   //Quicksort
+                    {
+                        var qs = new QuickSort();
+                        list = GetList(lbUnsorted);
+                        qs.Sort(list, 0, list.Length - 1);
+                        SetList(lbSorted, list);
+                    }
+                    break;
+                case "MS":    //Merge sort
+                    {
+                        var ms = new MergeSort();
+                        list = GetList(lbUnsorted);
+                        var sortedList = ms.Sort(list);
+                        SetList(lbSorted, sortedList);
                     }
                     break;
                 default:
@@ -132,6 +182,26 @@ namespace SorteerAlgoritmen
             return list;
         }
 
+        private string[] GetStringList(ListBox box)
+        {
+            string[] list = new string[box.Items.Count];
+            for (int i = 0; i < list.Length; i++)
+            {
+                list[i] = (string)box.Items[i];
+            }
+            return list;
+        }
+
+        private Auto[] GetAutoList(ListBox box)
+        {
+            var list = new Auto[box.Items.Count];
+            for (int i = 0; i < list.Length; i++)
+            {
+                list[i] = (Auto)box.Items[i];
+            }
+            return list;
+        }
+
         /// <summary>
         /// Voeg de lijst met getallen toe aan een listbox
         /// </summary>
@@ -143,15 +213,22 @@ namespace SorteerAlgoritmen
                 box.Items.Add(i);
         }
 
-        /// <summary>
-        /// Verander de mouse pointer zodat de gebruiker ziet dat de applicatie bezig is.
-        /// </summary>
-        /// <param name="busy"></param>
-        private void UpdateUI(bool busy = false)
+        private void SetList(ListBox box, string[] list)
         {
-            Mouse.OverrideCursor = busy ?Cursors.Wait: null;
+            foreach (var i in list)
+                box.Items.Add(i);
         }
 
+        private void SetList(ListBox box, Auto[] list)
+        {
+            foreach (var i in list)
+                box.Items.Add(i);
+        }
+
+        private void UpdateUI(bool busy = false)
+        {
+            Mouse.OverrideCursor = busy ? Cursors.Wait : null;
+        }
 
         /// <summary>
         /// Overloop en controleer of de lijst wel degelijk gesorteerd is
@@ -182,7 +259,13 @@ namespace SorteerAlgoritmen
             int nr = 0;
             if (e.Key == Key.Enter && int.TryParse(tbManual.Text, out nr))
             {
-                lbUnsorted.Items.Add(nr);
+                if (int.TryParse(tbManual.Text, out nr))
+                {
+                    lbUnsorted.Items.Add(nr);
+                } else
+                {
+                    lbUnsorted.Items.Add(tbManual.Text);
+                }
                 tbManual.Text = "";
             }
         }
@@ -194,7 +277,21 @@ namespace SorteerAlgoritmen
         /// <param name="e"></param>
         private void menuCars_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Oeps er is iets misgegaan. Probeer later nog eens opnieuw...");
+            string[] modellen = new[] { "Opel", "BMW", "Ford", "Mercedes", "Fiat" };
+            string[] colors = new[] { "Groen", "Rood", "Blauw", "Wit", "Zwart" };
+
+            for (var i = 0; i < ReadInput(tbAmount); i++)
+            {
+                var a = new Auto()
+                {
+                    Model = modellen[new Random().Next(0, modellen.Length)],
+                    Kleur = colors[new Random().Next(0, colors.Length)],
+                    Bouwjaar = 2000 + new Random().Next(0, 20),
+                    Brandstof = (Brandstof)new Random().Next(0, 3),
+                    AantalKm = new Random().Next(ReadInput(tbMin), ReadInput(tbMax))
+                };
+                lbUnsorted.Items.Add(a);
+            }
         }
     }
 }
