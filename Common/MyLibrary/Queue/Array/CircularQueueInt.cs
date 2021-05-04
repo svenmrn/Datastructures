@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace MyLibrary
+namespace MyLibrary.Queue.Array
 {
     /// <summary>
     /// The circular queue has 2 pointers Front and Rear.

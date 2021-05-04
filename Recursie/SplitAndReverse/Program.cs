@@ -1,4 +1,5 @@
 ﻿using MyLibrary;
+using MyLibrary.Queue.Array;
 using System;
 
 namespace SplitAndReverse

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyLibrary
+namespace MyLibrary.Queue.Array
 {
     public class LineairQueueString
     {
@@ -33,7 +33,7 @@ namespace MyLibrary
                 if (canResize)          // can the queue be resized ?
                 {
                     var newQueue = new string[queue.Length * 2];
-                    Array.Copy(queue, newQueue, queue.Length);
+                    System.Array.Copy(queue, newQueue, queue.Length);
                     queue = newQueue;
                 }
                 else
