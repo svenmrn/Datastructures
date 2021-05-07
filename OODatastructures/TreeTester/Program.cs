@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MyLibrary.Sorteeralgoritmen;
+using MyLibrary.Tree.BST;
+using System;
 
 namespace TreeTester
 {
@@ -7,25 +9,60 @@ namespace TreeTester
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World, here comes a nice Binary sorted tree !");
+            Console.WriteLine();
+            Console.WriteLine("Hoeveel getallen wil je aan de boom toevoegen ?");
+            int amount = 0;
+            int.TryParse(Console.ReadLine(), out amount);
+            bool loop = true;
+            //Create new Tree
+            var t = new TreeInt();
+            //Fill it with some random numbers
+            var rnd = new RandomGenerator(amount, 0, amount * 5, true).GenerateNumbers();
+            for (int i = 0; i < rnd.Length; i++)
+            {
+                t.Insert(rnd[i]);
+            }
 
-            //Demo code to use the BinaryTreePrinter class to show a BST in the Console window
+            do
+            {
+                Console.CursorVisible = false;
+                Console.Clear();
+                //Pretty print the tree with the BinaryTreePrinter
+                t.Root.Print();
 
-            //Create a test tree with some nodes
-            NodeInt root = new NodeInt(10);
-            root.Left = new NodeInt(8);
-            root.Right = new NodeInt(25);
-            root.Left.Left = new NodeInt(3);
-            root.Left.Right = new NodeInt(9); 
-            root.Right.Left = new NodeInt(22);
-            root.Right.Right = new NodeInt(27);
-            //.....
-
-            //Just call the 'Print' method on the root node of your tree and the whole tree will magically show in the console !
-            //Extra info.
-            //** Name your own Node class also 'NodeInt' (or use my NodeInt class)
-            //** Make sure that it has the properties : Left, Right and Value
-            //** You do not have to add the Print() method on your Node class. This is automatically done for you by the BinaryTreePrinter class
-            root.Print();
+                Console.WriteLine();
+                Console.CursorVisible = true;
+                //What next ?
+                Console.WriteLine("Commando: Add, Remove, New Tree of Quit ? (bv. A[getal]  R[getal] N[Aantal] Q1");
+                int value;
+                var cmd = Console.ReadLine();
+                if (int.TryParse(cmd.Substring(1), out value))
+                {
+                    switch (cmd[0])
+                    {
+                        case 'A':
+                            t.Insert(value);
+                            break;
+                        case 'R':
+                            t.Remove(value);
+                            break;
+                        case 'N':
+                            t.Clear();
+                            var rnd2 = new RandomGenerator(value, 0, value * 5, true).GenerateNumbers();
+                            for (int i = 0; i < rnd2.Length; i++)
+                            {
+                                t.Insert(rnd2[i]);
+                            }
+                            break;
+                        default:
+                            loop = false;
+                            break;
+                    }
+                }
+                else
+                    Console.WriteLine("Gelieve een geldig getal in te geven");
+            }
+            while (loop);
         }
     }
 }
