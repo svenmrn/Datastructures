@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace MyLibrary.DLL
 {
-    public class NodeString : SLL.NodeIntBase
+    public class NodeInt : SLL.NodeIntBase
     {
-        private NodeString next, prev;
+        private NodeInt next, prev;
 
-        public NodeString(int value) : base(value) { }
+        public NodeInt(int value) : base(value) { }
 
         /// <summary>
         /// While setting the Next, we always assure that that node points also to this node
         /// </summary>
-        public NodeString Next
+        public NodeInt Next
         {
             get
             {
@@ -32,7 +32,7 @@ namespace MyLibrary.DLL
         /// <summary>
         /// While setting the Previous, we always assure that that node points also to this node
         /// </summary>
-        public NodeString Prev
+        public NodeInt Prev
         {
             get
             {
@@ -44,6 +44,11 @@ namespace MyLibrary.DLL
                 if (value != null && !ReferenceEquals(value.Next, this))
                     prev.Next = this;
             }
+        }
+
+        public override string ToString()
+        {
+            return Value.ToString();
         }
     }
 }

@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace MyLibrary.DLL
 {
-    public class ListString
+    public class ListInt
     {
         #region private fields
-        private NodeString firstNode, lastNode;
+        private NodeInt firstNode, lastNode;
         #endregion
 
         #region public members
-        public NodeString First { get => firstNode; private set => firstNode = value; }
-        public NodeString Last { get => lastNode; private set => lastNode = value; }
+        public NodeInt First { get => firstNode; private set => firstNode = value; }
+        public NodeInt Last { get => lastNode; private set => lastNode = value; }
 
         public bool IsEmpty
         {
@@ -24,9 +24,9 @@ namespace MyLibrary.DLL
             }
         }
 
-        public NodeString AddFirst(int value)
+        public NodeInt AddFirst(int value)
         {
-            var n = new NodeString(value);
+            var n = new NodeInt(value);
             if (!IsEmpty)           //list not empty ?
                 n.Next = First;     //Connect the new node with the first node
             else
@@ -37,9 +37,9 @@ namespace MyLibrary.DLL
             return n;
         }
 
-        public NodeString AddLast(int value)
+        public NodeInt AddLast(int value)
         {
-            var newNode = new NodeString(value);
+            var newNode = new NodeInt(value);
             if (IsEmpty)
                 First = newNode;
             else
@@ -50,24 +50,24 @@ namespace MyLibrary.DLL
         }
 
 
-        public NodeString AddAfter(NodeString afterNode, int value)
+        public NodeInt AddAfter(NodeInt afterNode, int value)
         {
             if (afterNode == null)
                 throw new ArgumentException("The afterNode cannot be NULL");
 
-            var newNode = new NodeString(value);
+            var newNode = new NodeInt(value);
             newNode.Next = afterNode.Next;
             afterNode.Next = newNode;
             return newNode;
         }
 
-        public NodeString AddBefore(NodeString beforeNode, int value)
+        public NodeInt AddBefore(NodeInt beforeNode, int value)
         {
             if (beforeNode == null)
                 throw new ArgumentException("The beforeNode cannot be NULL");
 
-            var newNode = new NodeString(value);
-            NodeString temp = First;
+            var newNode = new NodeInt(value);
+            NodeInt temp = First;
 
             if (ReferenceEquals(First, beforeNode))  //want to add before the first ?
                 return AddFirst(value);
@@ -79,7 +79,7 @@ namespace MyLibrary.DLL
         }
 
 
-        public int RemoveNode(NodeString node)
+        public int RemoveNode(NodeInt node)
         {
             if (node == null)
                 throw new ArgumentException("The node cannot be NULL");
@@ -95,7 +95,7 @@ namespace MyLibrary.DLL
             return node.Value;
         }
 
-        public NodeString FindNode(int value)
+        public NodeInt FindNode(int value)
         {
             var temp = First;
             while (temp != null)
