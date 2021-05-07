@@ -49,13 +49,64 @@ namespace MyLibrary.Tree.BST
 
         public int Remove(int value)
         {
-            //var node = FindNode(value);
-            //if (node != null)
-            return 0;
+            Root = Remove(Root, value);
+            return value;
+        }
+
+        public void Clear()
+        {
+            Root = null;
         }
         #endregion
 
         #region private parts
+
+        private NodeInt Remove(NodeInt root, int value)
+        {
+            if (root == null)
+                return null;
+
+            //First descend the tree to find the node with the specified value
+            if (root.Value > value)
+            {
+                root.Left = Remove(root.Left, value);
+                return root;
+            }
+            else if (root.Value < value)
+            {
+                root.Right = Remove(root.Right, value);
+                return root;
+            }
+
+            //found the node with the requested value, let"s remove it
+            if (root.Left == null) // max. 1 child
+                return root.Right;
+            if (root.Right == null) // max. 1 child
+                return root.Left;
+
+            var min = FindMinValue(root.Right);
+            var newn = Remove(root, min);                //remove the original node
+            root.Value = min;                       //take over the value
+            return newn;
+        }
+
+
+        private int FindMinValue(NodeInt root)
+        {
+            if (root == null)
+                return -1;
+            if (root.Left != null)
+                return FindMinValue(root.Left);
+            return root.Value;
+        }
+
+        /// <summary>
+        /// Find the node with the specified value in the tree starting from the specified parent node
+        /// This method will either return the node itself, or the parent of the node (if the node itself does not exist)
+        /// </summary>
+        /// <param name="parent"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
         private NodeInt FindNode(NodeInt parent, int value)
         {
             NodeInt temp;

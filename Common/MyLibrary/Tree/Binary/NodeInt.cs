@@ -16,5 +16,9 @@ namespace MyLibrary.Tree.Binary
         public NodeInt Left { get; set; }
         public NodeInt Right { get; set; }
 
+        public override string ToString()
+        {
+            return Value.ToString();
+        }
     }
 }
