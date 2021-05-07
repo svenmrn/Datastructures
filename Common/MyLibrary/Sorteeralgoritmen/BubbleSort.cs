@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyLibrary.SLL;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -24,6 +25,33 @@ namespace MyLibrary.Sorteeralgoritmen
                         list[g + 1] = temp;
                     }
                 }
+            }
+        }
+
+        public void SortSLL(ListInt list)              //SLL Lijst
+        {
+            var currentOuter = list.First;
+            var currentInner = list.First;
+            var last = list.Last;
+
+            while(currentOuter != null)
+            {
+                while(!ReferenceEquals(currentInner,last))
+                {
+                    if (currentInner.Value > currentInner.Next.Value)
+                    {
+                        var temp = currentInner.Value;
+                        currentInner.Value = currentInner.Next.Value;
+                        currentInner.Next.Value = temp;
+                    }
+                    //Are we at the end of the iteration ?
+                    if (!ReferenceEquals(currentInner.Next, last))
+                        currentInner = currentInner.Next;
+                    else
+                        last = currentInner;            //update the last for the next iteration to be 1 less
+                }
+                currentOuter = currentOuter.Next;
+                currentInner = list.First;
             }
         }
 

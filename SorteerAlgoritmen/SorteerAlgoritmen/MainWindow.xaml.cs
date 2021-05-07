@@ -1,4 +1,5 @@
 ﻿using MyLibrary;
+using MyLibrary.SLL;
 using MyLibrary.Sorteeralgoritmen;
 using System;
 using System.Collections.Generic;
@@ -85,9 +86,9 @@ namespace SorteerAlgoritmen
                 case "BS":   //Bubble sort
                     {
                         var bs = new BubbleSort();
-                        list = GetList(lbUnsorted);
-                        bs.Sort(list);
-                        SetList(lbSorted, list);
+                        var list2 = GetSLLList(lbUnsorted);
+                        bs.SortSLL(list2);
+                        SetList(lbSorted, list2);
                     }
                     break;
                 case "SS":   //Selection Sort
@@ -182,6 +183,15 @@ namespace SorteerAlgoritmen
             return list;
         }
 
+        private ListInt GetSLLList(ListBox box)
+        {
+            var list = new ListInt();
+            for (int i = 0; i < box.Items.Count; i++)
+            {
+                list.AddLast((int)box.Items[i]);
+            }
+            return list;
+        }
         private string[] GetStringList(ListBox box)
         {
             string[] list = new string[box.Items.Count];
@@ -212,6 +222,17 @@ namespace SorteerAlgoritmen
             foreach (var i in list)
                 box.Items.Add(i);
         }
+
+        private void SetList(ListBox box, ListInt list)
+        {
+            var node = list.First;
+            while (node != null)
+            {
+                box.Items.Add(node.Value);
+                node = node.Next;
+            }
+        }
+
 
         private void SetList(ListBox box, string[] list)
         {
