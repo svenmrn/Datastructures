@@ -129,7 +129,7 @@ namespace SorteerAlgoritmen
                     {
                         var qs = new QuickSort();
                         list = GetList(lbUnsorted);
-                        qs.Sort(list, 0, list.Length - 1);
+                        qs.Sort(list);
                         SetList(lbSorted, list);
                     }
                     break;

@@ -8,7 +8,12 @@ namespace MyLibrary.Sorteeralgoritmen
 {
     public class QuickSort
     {
-        public void Sort(int[] list, int lowerIndex, int higherIndex)
+        public void Sort(int[] list)
+        {
+            Sort(list, 0, list.Length - 1);
+        }
+
+        private void Sort(int[] list, int lowerIndex, int higherIndex)
         {
             var i = lowerIndex;
             var j = higherIndex;
