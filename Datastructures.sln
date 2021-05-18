@@ -68,7 +68,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DLLTester", "DLLTester\DLLT
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "8.ZoekAlgoritmen", "8.ZoekAlgoritmen", "{CF87B5B8-8F98-4EFF-94FC-C1FB087CACBA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BinarySearch", "ZoekAlgoritmen\BinarySearch\BinarySearch.csproj", "{864766EE-C737-477A-A8EC-E12F35744AB3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BinarySearch", "ZoekAlgoritmen\BinarySearch\BinarySearch.csproj", "{864766EE-C737-477A-A8EC-E12F35744AB3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HashTable", "ZoekAlgoritmen\HashTable\HashTable.csproj", "{0FA4F0F2-B169-47F9-A0DA-A1869CCFD0F2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -168,6 +170,10 @@ Global
 		{864766EE-C737-477A-A8EC-E12F35744AB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{864766EE-C737-477A-A8EC-E12F35744AB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{864766EE-C737-477A-A8EC-E12F35744AB3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FA4F0F2-B169-47F9-A0DA-A1869CCFD0F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FA4F0F2-B169-47F9-A0DA-A1869CCFD0F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FA4F0F2-B169-47F9-A0DA-A1869CCFD0F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FA4F0F2-B169-47F9-A0DA-A1869CCFD0F2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -196,6 +202,7 @@ Global
 		{6A4FCAE9-14F4-408D-AE64-61D6ED69F4A2} = {976D97D9-8D20-493E-A57D-0042BE3D050A}
 		{6EBB950D-52CF-4D5A-82D7-634942CFE801} = {976D97D9-8D20-493E-A57D-0042BE3D050A}
 		{864766EE-C737-477A-A8EC-E12F35744AB3} = {CF87B5B8-8F98-4EFF-94FC-C1FB087CACBA}
+		{0FA4F0F2-B169-47F9-A0DA-A1869CCFD0F2} = {CF87B5B8-8F98-4EFF-94FC-C1FB087CACBA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {63B979FD-FFD1-47BB-886C-320C5127E9AD}

@@ -31,7 +31,7 @@ namespace MyLibrary.ZoekAlgoritmen
         /// <returns></returns>
         private int Find(int[] list, int value, int minIndex, int maxIndex)
         {
-            if (maxIndex < minIndex) return -1;         //base case value was not found in the list
+            if (maxIndex < minIndex) return -1;         //base case: value was not found in the list
 
             var middleIdx = minIndex + (maxIndex - minIndex) / 2;   //locate the middle of the list
             
