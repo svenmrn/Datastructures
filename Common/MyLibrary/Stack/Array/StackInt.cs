@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MyLibrary
+namespace MyLibrary.Stack.Array
 {
     public class StackInt
     {
@@ -19,7 +19,7 @@ namespace MyLibrary
             if (IsFull)
             {
                 var newArray = new int[stackArray.Length * 2];
-                Array.Copy(stackArray, newArray, stackArray.Length);
+                System.Array.Copy(stackArray, newArray, stackArray.Length);
                 //for (int f = 0; f < stackArray.Length; f++)   //alternatief
                 //    newArray[f] = stackArray[f];
                 stackArray = newArray;
@@ -66,7 +66,7 @@ namespace MyLibrary
             {
                 int[] temp = new int[top+1];
                 if (!IsEmpty)
-                    Array.Copy(stackArray, temp, top+1);
+                    System.Array.Copy(stackArray, temp, top+1);
                 return temp;
             }
         }
