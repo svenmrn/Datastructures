@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MyLibrary.SLL;
+using System;
 
 namespace MyLibrary.ZoekAlgoritmen
 {
     /// <summary>
-    /// Hashtable with Linked list for solving collisions
+    /// Hashtable with Nodes for solving collisions
     /// </summary>
     public class Hashtable_v2
     {

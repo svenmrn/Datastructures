@@ -10,7 +10,7 @@ namespace HashTable
             Console.WriteLine("Hello, give me some texts to add to the hash table!");
 
             string input = "";
-            var ht = new Hashtable_v2(20);
+            var ht = new Hashtable_v3(20);
 
             while (input != "exit")
             {
@@ -29,7 +29,7 @@ namespace HashTable
                 var a = ht.Array;
                 for (int i = 0; i < a.Length; i++)
                 {
-                    Console.WriteLine($"{i}: {a[i]}");
+                    Console.WriteLine($"{i}: {(a[i] == null ? "empty": a[i])}");
                 }
                 Console.WriteLine();
             }
