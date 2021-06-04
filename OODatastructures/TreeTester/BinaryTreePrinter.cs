@@ -1,4 +1,5 @@
 ﻿using MyLibrary.Tree.Binary;
+using MyLibrary.Tree.Binary.Generic;
 using System;
 using System.Collections.Generic;
 
@@ -10,25 +11,25 @@ namespace TreeTester
     /// </summary>
     public static class BTreePrinter
     {
-        class NodeInfo
+        class NodeInfo<T>
         {
-            public NodeInt Node;
+            public Node<T> Node;
             public string Text;
             public int StartPos;
             public int Size { get { return Text.Length; } }
             public int EndPos { get { return StartPos + Size; } set { StartPos = value - Size; } }
-            public NodeInfo Parent, Left, Right;
+            public NodeInfo<T> Parent, Left, Right;
         }
 
-        public static void Print(this NodeInt root, int topMargin = 2, int leftMargin = 2)
+        public static void Print<T>(this Node<T> root, int topMargin = 2, int leftMargin = 2)
         {
             if (root == null) return;
             int rootTop = Console.CursorTop + topMargin;
-            var last = new List<NodeInfo>();
+            var last = new List<NodeInfo<T>>();
             var next = root;
             for (int level = 0; next != null; level++)
             {
-                var item = new NodeInfo { Node = next, Text = next.Value.ToString(" 0 ") };
+                var item = new NodeInfo<T> { Node = next, Text = $" {next.ToString()} "};// (" 0 ") };
                 if (level < last.Count)
                 {
                     item.StartPos = last[level].EndPos + 1;
@@ -75,7 +76,7 @@ namespace TreeTester
             Console.SetCursorPosition(0, rootTop + 2 * last.Count - 1);
         }
 
-        private static void Print(NodeInfo item, int top)
+        private static void Print<T>(NodeInfo<T> item, int top)
         {
             SwapColors();
             Print(item.Text, top, item.StartPos);

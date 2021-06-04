@@ -1,5 +1,6 @@
 ﻿using MyLibrary.Sorteeralgoritmen;
 using MyLibrary.Tree.BST;
+using MyLibrary.Tree.BST.Generic;
 using System;
 
 namespace TreeTester
@@ -15,7 +16,7 @@ namespace TreeTester
             int.TryParse(Console.ReadLine(), out amount);
             bool loop = true;
             //Create new Tree
-            var t = new TreeInt();
+            var t = new Tree<int>();
             //Fill it with some random numbers
             var rnd = new RandomGenerator(amount, 0, amount * 5, true).GenerateNumbers();
             for (int i = 0; i < rnd.Length; i++)
